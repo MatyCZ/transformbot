@@ -15,6 +15,7 @@ export * from "./actions/toNull.ts";
 export * from "./actions/toUpperCase.ts";
 export * from "./actions/trim.ts";
 export * from "./methods/pipe.ts";
+export * from "./methods/transform.ts";
 export * from "./schemas/boolean.ts";
 export * from "./schemas/number.ts";
 export * from "./schemas/string.ts";
@@ -22,6 +23,7 @@ export * from "./schemas/string.ts";
 export type {
   Action,
   BooleanSchema,
+  InferSchemaOutput,
   NumberSchema,
   Schema,
   StringSchema,
