@@ -5,7 +5,7 @@ import {
   InferSchemaOutput,
 } from "../types.ts";
 
-export default function transform<
+export function transform<
   TSchema extends BooleanSchema | NumberSchema | StringSchema,
   TInput,
 >(schema: TSchema, input: TInput): InferSchemaOutput<TSchema> {
