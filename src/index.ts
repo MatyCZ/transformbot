@@ -23,10 +23,7 @@ export * from "./methods/transform.ts";
 
 export type {
   Action,
-  BooleanConversion,
   Conversion,
   InferTransformation,
-  NumberConversion,
-  StringConversion,
   Transformation,
 } from "./types.ts";
