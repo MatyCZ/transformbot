@@ -1,14 +1,13 @@
 import type { Action } from "../types.ts";
 
-export function toEmpty<
-  TInput extends string | undefined | null,
-  TOutput extends string,
->(): Action<TInput, TOutput> {
+export type ToEmptyAction = Action<string | undefined | null, string>;
+
+export function toEmpty(): ToEmptyAction {
   return (input) => {
     if (input === undefined || input === null) {
-      return "" as TOutput;
+      return "";
     }
 
-    return input as unknown as TOutput;
+    return input;
   };
 }

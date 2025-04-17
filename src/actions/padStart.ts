@@ -1,14 +1,12 @@
 import type { Action } from "../types.ts";
 
-export interface PadStartOptions {
-  fillString?: string;
-  maxLength: number;
-}
+export type PadStartAction = Action<string, string>;
 
-export default function padStart<TInput extends string, TOutput = TInput>(
-  options: PadStartOptions,
-): Action<TInput, TOutput> {
+export function padStart(
+  maxLength: number,
+  fillString?: string,
+): PadStartAction {
   return (input) => {
-    return input.padStart(options.maxLength, options.fillString) as TOutput;
+    return input.padStart(maxLength, fillString);
   };
 }

@@ -1,7 +1,9 @@
 import type { Action } from "../types.ts";
 
-export function stripNewlines<TInput extends string, TOutput = TInput>(): Action<TInput, TOutput> {
+export type StripNewlinesAction = Action<string, string>;
+
+export function stripNewlines(): StripNewlinesAction {
   return (input) => {
-    return input.replace(/\r?\n|\r/g, "") as TOutput;
+    return input.replace(/\r?\n|\r/g, "");
   };
 }

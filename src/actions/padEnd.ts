@@ -1,14 +1,9 @@
 import type { Action } from "../types.ts";
 
-export interface PadEndOptions {
-  fillString?: string;
-  maxLength: number;
-}
+export type PadEndAction = Action<string, string>;
 
-export default function padEnd<TInput extends string, TOutput = TInput>(
-  options: PadEndOptions,
-): Action<TInput, TOutput> {
+export function padEnd(maxLength: number, fillString?: string): PadEndAction {
   return (input) => {
-    return input.padEnd(options.maxLength, options.fillString) as TOutput;
+    return input.padEnd(maxLength, fillString);
   };
 }

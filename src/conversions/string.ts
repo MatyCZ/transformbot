@@ -1,6 +1,8 @@
-import type { StringSchema } from "../types.ts";
+import { Conversion } from "../types.ts";
 
-export function string(): StringSchema {
+export type StringConversion = Conversion<unknown, string>;
+
+export function string(): StringConversion {
   return (input) => {
     if (input === null || input === undefined) {
       return "";

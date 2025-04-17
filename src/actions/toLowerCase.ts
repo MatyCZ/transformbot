@@ -1,7 +1,9 @@
 import type { Action } from "../types.ts";
 
-export function toLowerCase<TInput extends string, TOutput = TInput>(): Action<TInput, TOutput> {
+export type ToLowerCaseAction = Action<string, string>;
+
+export function toLowerCase(): ToLowerCaseAction {
   return (input) => {
-    return input.toLowerCase() as TOutput;
+    return input.toLowerCase();
   };
 }

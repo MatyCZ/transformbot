@@ -1,31 +1,41 @@
-import type { Action, Schema } from "../types.ts";
+import type { Action, Conversion, Transformation } from "../types.ts";
 
-export function pipe<A, B>(schema: Schema<A, B>): Action<A, B>;
-export function pipe<A, B, C>(schema: Schema<A, B>, action1: Action<B, C>): Action<A, C>;
-export function pipe<A, B, C, D>(schema: Schema<A, B>, action1: Action<B, C>, action2: Action<C, D>): Action<A, D>;
+export function pipe<A, B>(conversion: Conversion<A, B>): Transformation<A, B>;
+export function pipe<A, B, C>(
+  conversion: Conversion<A, B>,
+  action1: Action<B, C>,
+): Transformation<A, C>;
+export function pipe<A, B, C, D>(
+  conversion: Conversion<A, B>,
+  action1: Action<B, C>,
+  action2: Action<C, D>,
+): Transformation<A, D>;
 export function pipe<A, B, C, D, E>(
-  schema: Schema<A, B>,
+  conversion: Conversion<A, B>,
   action1: Action<B, C>,
   action2: Action<C, D>,
   action3: Action<D, E>,
-): Action<A, E>;
+): Transformation<A, E>;
 export function pipe<A, B, C, D, E, F>(
-  schema: Schema<A, B>,
+  conversion: Conversion<A, B>,
   action1: Action<B, C>,
   action2: Action<C, D>,
   action3: Action<D, E>,
   action4: Action<E, F>,
-): Action<A, F>;
+): Transformation<A, F>;
 export function pipe<A, B, C, D, E, F, G>(
-  schema: Schema<A, B>,
+  conversion: Conversion<A, B>,
   action1: Action<B, C>,
   action2: Action<C, D>,
   action3: Action<D, E>,
   action4: Action<E, F>,
   action5: Action<F, G>,
-): Action<A, G>;
-export function pipe(...transformations: Action[]): Action {
+): Transformation<A, G>;
+export function pipe(...transformations: Transformation[]): Transformation {
   return (input: unknown) => {
-    return transformations.reduce((value, transformation) => transformation(value), input);
+    return transformations.reduce(
+      (value, transformation) => transformation(value),
+      input,
+    );
   };
 }

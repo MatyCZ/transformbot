@@ -1,6 +1,8 @@
-import type { NumberSchema } from "../types.ts";
+import { Conversion } from "../types.ts";
 
-export function number(): NumberSchema {
+export type NumberConversion = Conversion<unknown, number>;
+
+export function number(): NumberConversion {
   return (input) => {
     if (input === null || input === undefined || input === "") {
       return 0;

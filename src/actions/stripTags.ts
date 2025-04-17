@@ -1,7 +1,9 @@
 import type { Action } from "../types.ts";
 
-export function stripTags<TInput extends string, TOutput = TInput>(): Action<TInput, TOutput> {
+export type StripTagsAction = Action<string, string>;
+
+export function stripTags(): StripTagsAction {
   return (input) => {
-    return input.replace(/(<([^>]+)>)/gi, "") as TOutput;
+    return input.replace(/(<([^>]+)>)/gi, "");
   };
 }

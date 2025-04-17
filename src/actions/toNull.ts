@@ -1,9 +1,11 @@
 import type { Action } from "../types.ts";
 
-export function toNull<TInput extends boolean | number | string | undefined | null, TOutput = TInput>(): Action<
-  TInput,
-  TOutput | null
-> {
+export type ToNullAction<TInput, TOutput> = Action<TInput, TOutput>;
+
+export function toNull<
+  TInput extends boolean | number | string | undefined | null,
+  TOutput = TInput,
+>(): ToNullAction<TInput, TOutput | null> {
   return (input) => {
     if (input === undefined || input === null) {
       return null;
@@ -17,7 +19,10 @@ export function toNull<TInput extends boolean | number | string | undefined | nu
       return null;
     }
 
-    if (typeof input === "string" && (input === "" || input === "0" || input === "0.0")) {
+    if (
+      typeof input === "string" &&
+      (input === "" || input === "0" || input === "0.0")
+    ) {
       return null;
     }
 

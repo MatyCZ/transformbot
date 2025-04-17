@@ -1,13 +1,15 @@
 export type Action<TInput = unknown, TOutput = unknown> = (
   input: TInput,
 ) => TOutput;
-export type Schema<TInput = unknown, TOutput = unknown> = (
+export type Conversion<TInput = unknown, TOutput = unknown> = (
   input: TInput,
 ) => TOutput;
 
-export type BooleanSchema = Schema<unknown, boolean>;
-export type NumberSchema = Schema<unknown, number>;
-export type StringSchema = Schema<unknown, string>;
+export type Transformation<TInput = unknown, TOutput = unknown> =
+  | Action<TInput, TOutput>
+  | Conversion<TInput, TOutput>;
 
-export type InferSchemaOutput<TSchema> =
-  TSchema extends Schema<unknown, infer TOutput> ? TOutput : never;
+export type InferTransformation<TTransformation> =
+  TTransformation extends Transformation<unknown, infer TOutput>
+    ? TOutput
+    : never;

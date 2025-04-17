@@ -1,13 +1,8 @@
-import {
-  BooleanSchema,
-  NumberSchema,
-  StringSchema,
-  InferSchemaOutput,
-} from "../types.ts";
+import type { InferTransformation, Transformation } from "../types.ts";
 
-export function transform<
-  TSchema extends BooleanSchema | NumberSchema | StringSchema,
-  TInput,
->(schema: TSchema, input: TInput): InferSchemaOutput<TSchema> {
-  return schema(input) as InferSchemaOutput<TSchema>;
+export function transform<TTransformation extends Transformation, TInput>(
+  transformation: TTransformation,
+  input: TInput,
+): InferTransformation<TTransformation> {
+  return transformation(input) as InferTransformation<TTransformation>;
 }

@@ -1,13 +1,22 @@
 import type { Action } from "../types.ts";
 
-export function toInteger<TInput extends number | string, TOutput extends number>(): Action<TInput, TOutput> {
+export type ToIntegerAction = Action<boolean | number | string, number>;
+
+export function toInteger(): ToIntegerAction {
   return (input) => {
     if (input === null || input === undefined || input === "") {
-      return 0 as unknown as TOutput;
+      return 0;
     }
 
-    const num = typeof input === "string" ? parseFloat(input as string) : (input as number);
+    if (typeof input === "boolean") {
+      return input ? 1 : 0;
+    }
 
-    return (isNaN(num) ? 0 : Math.trunc(num)) as unknown as TOutput;
+    const num =
+      typeof input === "string"
+        ? parseFloat(input as string)
+        : (input as number);
+
+    return isNaN(num) ? 0 : Math.trunc(num);
   };
 }
