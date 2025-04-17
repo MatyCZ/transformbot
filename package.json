@@ -1,0 +1,38 @@
+{
+  "name": "transformbot",
+  "description": "The modular and type-safe schema library for transforming values",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Matej Szendi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MatyCZ/transformbot.git"
+  },
+  "keywords": [
+    "filtering",
+    "modular",
+    "parsing",
+    "schema",
+    "transformation",
+    "type-safe",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "esbuild": "^0.25.2",
+    "eslint": "^9.24.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --outfile=dist/index.min.js --format=esm --platform=neutral --minify --sourcemap",
+    "format": "prettier --write 'src/**/*'",
+    "format:check": "prettier --check .",
+    "lint": "eslint \"src/**/*.ts*\" && tsc --noEmit",
+    "lint:fix": "eslint \"src/**/*.ts*\" --fix"
+  }
+}
