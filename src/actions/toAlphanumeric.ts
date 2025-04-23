@@ -2,8 +2,22 @@ import type { Action } from "../types.ts";
 
 export type ToAlphanumericAction = Action<string, string>;
 
-export function toAlphanumeric(): ToAlphanumericAction {
+export function toAlphanumeric(ignore?: RegExp | string): ToAlphanumericAction {
   return (input) => {
-    return input.replace(/[^a-zA-Z0-9]/g, "");
+    let ignorePattern = "";
+
+    if (ignore) {
+      if (ignore instanceof RegExp) {
+        const ignoreRegex = ignore;
+
+        return input.replace(new RegExp("[^a-zA-Z0-9]", "g"), (char: string) =>
+          ignoreRegex.test(char) ? char : "",
+        );
+      } else {
+        ignorePattern = ignore.replace(/[-\\\]^]/g, "\\$&");
+      }
+    }
+
+    return input.replace(new RegExp(`[^a-zA-Z0-9${ignorePattern}]`, "g"), "");
   };
 }
