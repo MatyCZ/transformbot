@@ -52,8 +52,8 @@ These schemas can then be applied to transform input data.
 import * as tb from 'transformbot';
 
 const AgeSchema = tb.number();
-const EmailSchema = tb.pipe(tb.string(), tb.trim(), tb.toNull());
-const VehicleVINSchema = tb.pipe(tb.string(), tb.toUpperCase(), tb.toAlphanumeric(), tb.toNull());
+const EmailSchema = tb.pipe(tb.string(), tb.trim(), tb.stripTags(), tb.stripNewlines(), tb.stripSpaces(), tb.stripDiacritics(), tb.toNull());
+const VehicleVINSchema = tb.pipe(tb.string(), tb.toAlphanumeric(), tb.toUpperCase(), tb.toNull());
 const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 ```
 
