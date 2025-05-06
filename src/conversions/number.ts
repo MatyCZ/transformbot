@@ -8,8 +8,19 @@ export function number(): NumberConversion {
       return 0;
     }
 
-    const num = Number(input);
+    if (typeof input === "number") {
+      return isNaN(input) ? 0 : input;
+    }
 
-    return isNaN(num) ? 0 : num;
+    if (typeof input === "string") {
+      let normalized = input.replace(/[\s\u00A0]+/g, "");
+      normalized = normalized.replace(",", ".");
+
+      const num = Number(normalized);
+
+      return isNaN(num) ? 0 : num;
+    }
+
+    return 0;
   };
 }
