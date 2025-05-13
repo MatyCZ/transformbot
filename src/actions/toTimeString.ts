@@ -4,8 +4,8 @@ import { addLeadingZeros } from "../utils/addLeadingZeros.ts";
 export type ToTimeStringAction = Action<Date, string>;
 
 export function toTimeString(
-  useSeconds?: true,
-  useMiliseconds?: false,
+  useSeconds = true,
+  useMiliseconds = false,
 ): ToTimeStringAction {
   return (input) => {
     let output =
