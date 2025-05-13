@@ -1,6 +1,6 @@
 import type { Action } from "../types.ts";
 
-export type ToMinValueType = number | Date;
+export type ToMinValueType = Date | number;
 export type ToMinValueAction<TInput extends ToMinValueType> = Action<
   TInput,
   TInput

@@ -1,7 +1,7 @@
 ## Key Features
 
 **✅ Transforms to Primitive Types**\
-Converts input values to `boolean`, `number`, and `string`.
+Converts input values to `boolean`, `number`, and `string`, and also supports conversion to JavaScript `Date` objects.
 
 **🧼 Rich Set of Transformation Actions**\
 Includes cleaning, formatting, normalization, trimming, type conversion, and more.

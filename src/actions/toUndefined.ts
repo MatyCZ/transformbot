@@ -1,26 +1,26 @@
 import type { Action } from "../types.ts";
 
-export type ToNullAction<TInput, TOutput> = Action<TInput, TOutput>;
+export type ToUndefinedAction<TInput, TOutput> = Action<TInput, TOutput>;
 
-export function toNull<
+export function toUndefined<
   TInput extends Date | boolean | number | string | undefined | null,
   TOutput = TInput,
->(): ToNullAction<TInput, TOutput | null> {
+>(): ToUndefinedAction<TInput, TOutput | undefined> {
   return (input) => {
     if (input === undefined || input === null) {
-      return null;
+      return undefined;
     }
 
     if (input instanceof Date && input.getTime() === 0) {
-      return null;
+      return undefined;
     }
 
     if (typeof input === "boolean" && !input) {
-      return null;
+      return undefined;
     }
 
     if (typeof input === "number" && (input === 0 || input === 0.0)) {
-      return null;
+      return undefined;
     }
 
     if (
@@ -33,7 +33,7 @@ export function toNull<
         input === "00:00:00" ||
         input === "00:00:00.000")
     ) {
-      return null;
+      return undefined;
     }
 
     return input as TOutput;
