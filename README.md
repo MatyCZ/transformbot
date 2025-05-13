@@ -97,6 +97,8 @@ Below is an overview of all supported transformation actions.
 - `toDigits()` - Extracts only the digits from a string
 - `toDotCase()` - Converts the string to a dot.case format
 - `toEmpty()` - Converts empty/invalid values to an empty string
+- `toExponential()` - Converts a number to exponential notation
+- `toFixed()` - Formats a number using fixed-point notation
 - `toFloat()` - Ensures a number is treated as a float
 - `toInteger()` - Converts a number to an integer
 - `toKebabCase()` - Converts a string to a kebab-case format
@@ -105,6 +107,7 @@ Below is an overview of all supported transformation actions.
 - `toMinValue()` - Limits a value to a minimum
 - `toNull()` - Converts empty/invalid values to null
 - `toPascalCase()` - Converts the string to a PascalCase format
+- `toPrecision()` - Returns a string representing a number to specified precision
 - `toSnakeCase()` - Converts the string to a snake_case format
 - `toTimeString()` - Formats a time value to a string
 - `toUndefined()` - Converts empty/invalid values to undefined
