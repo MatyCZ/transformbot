@@ -9,12 +9,21 @@ export function toFloat(): ToFloatAction {
     }
 
     if (typeof input === "number") {
-      return isNaN(input) ? 0.0 : input;
+      if (isNaN(input)) {
+        return 0.0;
+      }
+
+      return input % 1 === 0 ? Number(input.toFixed(1)) : input;
     }
 
     if (typeof input === "string") {
       const num = parseFloat(input.replace(",", "."));
-      return isNaN(num) ? 0.0 : num;
+
+      if (isNaN(num)) {
+        return 0.0;
+      }
+
+      return num % 1 === 0 ? Number(num.toFixed(1)) : num;
     }
 
     return 0.0;

@@ -52,10 +52,72 @@ These schemas can then be applied to transform input data.
 import * as tb from 'transformbot';
 
 const AgeSchema = tb.number();
+const AlphanumericUppercaseSchema = tb.pipe(tb.string(), tb.toUpperCase(), tb.toAlphanumeric(), tb.toEmpty());
+const BooleanSchema = tb.pipe(tb.boolean(), tb.toNull());
+const DateSchema = tb.pipe(tb.date(), tb.toNull());
+const DateStringSchema = tb.pipe(tb.date(), tb.toDateString(), tb.toNull());
 const EmailSchema = tb.pipe(tb.string(), tb.trim(), tb.stripTags(), tb.stripNewlines(), tb.stripSpaces(), tb.stripDiacritics(), tb.toNull());
+const FloatSchema = tb.pipe(tb.number(), tb.toFloat());
+const TimeSchema = tb.pipe(tb.time(), tb.toNull());
+const TimeStringSchema = tb.pipe(tb.time(), tb.toTimeString(), tb.toNull());
 const VehicleVINSchema = tb.pipe(tb.string(), tb.toAlphanumeric(), tb.toUpperCase(), tb.toNull());
 const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 ```
+
+## Available Transformation Functions
+
+Below is an overview of all supported transformation actions.
+
+### Conversions
+
+- `boolean()` - Converts an input to a boolean value
+- `date()` - Converts an input to a Date object
+- `number()` - Converts an input to a number
+- `string()` - Converts an input to a string
+
+### Actions
+
+- `custom()` - Applies a custom transformation function
+- `decodeURI()` - Decodes a URI-encoded string
+- `encodeURI()` - Encodes a string as a URI component
+- `normalize()` - Normalizes a Unicode string
+- `padEnd()` - Pads a string at the end
+- `padStart()` - Pads a string at the start
+- `replace()` - Replaces a substring with another
+- `stripDiacritics()` - Removes the diacritical marks
+- `stripMultiSpaces()` - Removes the multiple consecutive spaces
+- `stripNewlines()` - Removes all the newline characters
+- `stripSpaces()` - Removes all the spaces
+- `stripTags()` - Removes the HTML/XML tags
+- `toAlpha()` - Removes all the non-alphabetic characters
+- `toAlphanumeric()` - Removes all the non-alphanumeric characters
+- `toCamelCase()` - Converts a string to a camelCase format
+- `toCapitalCase()` - Converts the string so that each word starts with an uppercase letter
+- `toDateString()` - Formats a Date object to a string
+- `toDigits()` - Extracts only the digits from a string
+- `toDotCase()` - Converts the string to a dot.case format
+- `toEmpty()` - Converts empty/invalid values to an empty string
+- `toFloat()` - Ensures a number is treated as a float
+- `toInteger()` - Converts a number to an integer
+- `toKebabCase()` - Converts a string to a kebab-case format
+- `toLowerCase()` - Converts a string to lowercase
+- `toMaxValue()` - Limits a value to a maximum
+- `toMinValue()` - Limits a value to a minimum
+- `toNull()` - Converts empty/invalid values to null
+- `toPascalCase()` - Converts the string to a PascalCase format
+- `toSnakeCase()` - Converts the string to a snake_case format
+- `toTimeString()` - Formats a time value to a string
+- `toUndefined()` - Converts empty/invalid values to undefined
+- `toUpperCase()` - Converts a string to uppercase
+- `toWellFormed()` - Replaces all lone surrogates in a string with the Unicode replacement character U+FFFD
+- `trim()` - Removes the whitespace from both ends
+- `trimEnd()` - Removes the whitespace from the end
+- `trimStart()` - Removes the whitespace from the start
+
+### Methods
+
+- `pipe()` - Combines multiple transformations into a single pipeline
+- `transform()` - Applies a transformation to an input value
 
 ## Credits
 
