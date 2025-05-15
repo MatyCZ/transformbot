@@ -3,11 +3,11 @@ import type { Action } from "../types.ts";
 export type ToUndefinedAction<TInput, TOutput> = Action<TInput, TOutput>;
 
 export function toUndefined<
-  TInput extends Date | boolean | number | string | undefined | null,
+  TInput extends Date | boolean | number | string | null,
   TOutput = TInput,
 >(): ToUndefinedAction<TInput, TOutput | undefined> {
   return (input) => {
-    if (input === undefined || input === null) {
+    if (input === null) {
       return undefined;
     }
 

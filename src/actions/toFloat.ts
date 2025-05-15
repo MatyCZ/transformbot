@@ -1,11 +1,11 @@
 import type { Action } from "../types.ts";
 
-export type ToFloatAction = Action<number | string, number>;
+export type ToFloatAction = Action<number | string | null, number | null>;
 
 export function toFloat(): ToFloatAction {
   return (input) => {
-    if (input === undefined || input === null) {
-      return 0.0;
+    if (input === null) {
+      return null;
     }
 
     if (typeof input === "number") {

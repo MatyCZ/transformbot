@@ -23,6 +23,8 @@ export * from "./actions/toFixed.ts";
 export * from "./actions/toFloat.ts";
 export * from "./actions/toInteger.ts";
 export * from "./actions/toKebabCase.ts";
+export * from "./actions/toLocaleDateString.ts";
+export * from "./actions/toLocaleTimeString.ts";
 export * from "./actions/toLowerCase.ts";
 export * from "./actions/toMaxValue.ts";
 export * from "./actions/toMinValue.ts";

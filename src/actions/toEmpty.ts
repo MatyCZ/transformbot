@@ -1,10 +1,10 @@
 import type { Action } from "../types.ts";
 
-export type ToEmptyAction = Action<string | undefined | null, string>;
+export type ToEmptyAction = Action<string | null, string>;
 
 export function toEmpty(): ToEmptyAction {
   return (input) => {
-    if (input === undefined || input === null) {
+    if (input === null) {
       return "";
     }
 

@@ -1,6 +1,6 @@
 import type { Action } from "../types.ts";
 
-export type ReplaceAction = Action<string, string>;
+export type ReplaceAction = Action<string | null, string | null>;
 
 /**
  * @param searchValue A string or regular expression to search for.
@@ -11,6 +11,10 @@ export function replace(
   replaceValue: string,
 ): ReplaceAction {
   return (input) => {
+    if (input === null) {
+      return null;
+    }
+
     return input.replace(searchValue, replaceValue);
   };
 }

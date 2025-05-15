@@ -1,29 +1,22 @@
 import { Conversion } from "../types.ts";
 
-export type DateConversion = Conversion<unknown, Date>;
+export type DateConversion = Conversion<unknown, Date | null>;
 
 export function date(): DateConversion {
   return (input) => {
-    const defaultDate = new Date(0);
-
     if (input === null || input === undefined || input === "") {
-      return defaultDate;
+      return null;
     }
 
     if (input instanceof Date) {
-      return isNaN(input.getTime()) ? defaultDate : input;
+      return isNaN(input.getTime()) ? null : input;
     }
 
-    if (typeof input === "number") {
+    if (typeof input === "number" || typeof input === "string") {
       const dateObj = new Date(input);
-      return isNaN(dateObj.getTime()) ? defaultDate : dateObj;
+      return isNaN(dateObj.getTime()) ? null : dateObj;
     }
 
-    if (typeof input === "string") {
-      const dateObj = new Date(input);
-      return isNaN(dateObj.getTime()) ? defaultDate : dateObj;
-    }
-
-    return defaultDate;
+    return null;
   };
 }

@@ -1,7 +1,7 @@
 {
   "name": "transformbot",
   "description": "The modular and type-safe schema library for transforming values",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "license": "MIT",
   "author": "Matej Szendi",
   "repository": {

@@ -1,9 +1,13 @@
 import type { Action } from "../types.ts";
 
-export type ToCapitalCaseAction = Action<string, string>;
+export type ToCapitalCaseAction = Action<string | null, string | null>;
 
 export function toCapitalCase(): ToCapitalCaseAction {
   return (input) => {
+    if (input === null) {
+      return null;
+    }
+
     return input
       .replace(/[_\\-]+/g, " ")
       .replace(/\s+/g, " ")

@@ -1,13 +1,17 @@
 import type { Action } from "../types.ts";
 import { addLeadingZeros } from "../utils/addLeadingZeros.ts";
 
-export type ToTimeStringAction = Action<Date, string>;
+export type ToTimeStringAction = Action<Date | null, string | null>;
 
 export function toTimeString(
   useSeconds = true,
   useMiliseconds = false,
 ): ToTimeStringAction {
   return (input) => {
+    if (input === null) {
+      return null;
+    }
+
     let output =
       addLeadingZeros(input.getHours(), 2) +
       ":" +

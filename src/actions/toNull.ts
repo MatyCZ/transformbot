@@ -7,7 +7,7 @@ export function toNull<
   TOutput = TInput,
 >(): ToNullAction<TInput, TOutput | null> {
   return (input) => {
-    if (input === undefined || input === null) {
+    if (input === null) {
       return null;
     }
 
@@ -23,16 +23,7 @@ export function toNull<
       return null;
     }
 
-    if (
-      typeof input === "string" &&
-      (input === "" ||
-        input === "0" ||
-        input === "0.0" ||
-        input === "1970-01-01" ||
-        input === "00:00" ||
-        input === "00:00:00" ||
-        input === "00:00:00.000")
-    ) {
+    if (typeof input === "string" && input === "") {
       return null;
     }
 

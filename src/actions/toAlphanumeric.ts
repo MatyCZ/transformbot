@@ -1,9 +1,13 @@
 import type { Action } from "../types.ts";
 
-export type ToAlphanumericAction = Action<string, string>;
+export type ToAlphanumericAction = Action<string | null, string | null>;
 
 export function toAlphanumeric(ignore?: RegExp | string): ToAlphanumericAction {
   return (input) => {
+    if (input === null) {
+      return null;
+    }
+
     let ignorePattern = "";
 
     if (ignore) {

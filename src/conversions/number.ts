@@ -1,15 +1,15 @@
 import { Conversion } from "../types.ts";
 
-export type NumberConversion = Conversion<unknown, number>;
+export type NumberConversion = Conversion<unknown, number | null>;
 
 export function number(): NumberConversion {
   return (input) => {
     if (input === null || input === undefined || input === "") {
-      return 0;
+      return null;
     }
 
     if (typeof input === "number") {
-      return isNaN(input) ? 0 : input;
+      return isNaN(input) ? null : input;
     }
 
     if (typeof input === "string") {
@@ -18,9 +18,9 @@ export function number(): NumberConversion {
 
       const num = Number(normalized);
 
-      return isNaN(num) ? 0 : num;
+      return isNaN(num) ? null : num;
     }
 
-    return 0;
+    return null;
   };
 }

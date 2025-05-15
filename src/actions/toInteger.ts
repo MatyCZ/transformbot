@@ -1,6 +1,6 @@
 import type { Action } from "../types.ts";
 
-export type ToIntegerAction = Action<boolean | number | string, number>;
+export type ToIntegerAction = Action<boolean | number | string | null, number>;
 
 export function toInteger(): ToIntegerAction {
   return (input) => {
