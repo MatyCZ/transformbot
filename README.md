@@ -51,6 +51,7 @@ These schemas can then be applied to transform input data.
 ```ts
 import * as tb from 'transformbot';
 
+const ArrayNumber = tb.pipe(tb.array(tb.number()), tb.toNull());
 const AgeSchema = tb.number();
 const AlphanumericUppercaseSchema = tb.pipe(tb.string(), tb.toUpperCase(), tb.toAlphanumeric(), tb.toEmpty());
 const BooleanSchema = tb.pipe(tb.boolean(), tb.toNull());
@@ -66,9 +67,13 @@ const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 
 ## Transformations Overview
 
-| Conversion Type                                    | Transformation Action Type                                                                                | Output Normalization Action Type                         |
+| Availaible conversions                             | Availaible transformation actions                                                                         | Availaible output normalization actions                  |
 |----------------------------------------------------|-----------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
 | `array()` - Converts an input to an Array          |                                                                                                           | `toDefault()` - Converts a null value to a default value |
+|                                                    |                                                                                                           | `toNull()` - Converts empty array to null                |
+|                                                    |                                                                                                           | `toUndefined()` - Converts empty array to undefined      |
+| `boolean()` - Converts an input to a boolean value |                                                                                                           | `toDefault()` - Converts a null value to a default value |
+|                                                    |                                                                                                           | `toUndefined()` - Converts a null value to undefined     |
 | `date()` - Converts an input to a Date object      | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value |
 |                                                    | `toDateString()` - Formats a Date object to a date string                                                 | `toNull()` - Converts invalid value to null              |
 |                                                    | `toLocaleDateString()` - Formats a Date object or time value to a localized date                          | `toUndefined()` - Converts invalid value to undefined    |
@@ -76,8 +81,6 @@ const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 |                                                    | `toMaxValue()` - Limits a date value to a maximum date value                                              |                                                          |
 |                                                    | `toMinValue()` - Limits a date value to a minimum date value                                              |                                                          |
 |                                                    | `toTimeString()` - Formats a time value to a string                                                       |                                                          |
-| `boolean()` - Converts an input to a boolean value |                                                                                                           | `toDefault()` - Converts a null value to a default value |
-|                                                    |                                                                                                           | `toUndefined()` - Converts a null value to undefined     |
 | `number()` - Converts an input to a number         | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value |
 |                                                    | `toExponential()` - Converts a number to exponential notation                                             | `toNull()` - Converts 0/0.0 value to null                |
 |                                                    | `toFixed()` - Formats a number using fixed-point notation                                                 | `toUndefined()` - Converts 0/0.0/null value to undefined |
