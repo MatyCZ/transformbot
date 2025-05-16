@@ -8,6 +8,12 @@ export function number(): NumberConversion {
       return null;
     }
 
+    if (typeof input === "bigint") {
+      const num = Number(input);
+
+      return isNaN(num) ? null : num;
+    }
+
     if (typeof input === "number") {
       return isNaN(input) ? null : input;
     }

@@ -2,17 +2,14 @@ import type { Action } from "../types.ts";
 
 export type ToDefaultAction<TInput, TOutput> = Action<TInput, TOutput>;
 
-export function toDefault<
-  TInput extends Date | boolean | number | string | null,
-  TOutput extends NonNullable<TInput>,
->(
-  defaultValue: TOutput,
-): ToDefaultAction<TInput, TOutput | NonNullable<TInput>> {
+export function toDefault<TInput, TDefault extends NonNullable<TInput>>(
+  defaultValue: TDefault,
+): ToDefaultAction<TInput, NonNullable<TInput>> {
   return (input) => {
     if (input === null) {
-      return defaultValue;
+      return defaultValue as NonNullable<TInput>;
     }
 
-    return input as TOutput;
+    return input as NonNullable<TInput>;
   };
 }

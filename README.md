@@ -1,7 +1,7 @@
 ## Key Features
 
 **✅ Transforms to Primitive Types**\
-Converts input values to `boolean`, `number`, and `string`, and also supports conversion to JavaScript `Date` objects.
+Converts input values to `array`, `boolean`, `number`, and `string`, and also supports conversion to JavaScript `Date` objects.
 
 **🧼 Rich Set of Transformation Actions**\
 Includes cleaning, formatting, normalization, trimming, type conversion, and more.
@@ -66,56 +66,57 @@ const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 
 ## Transformations Overview
 
-| Conversion Type                                    | Transformation Action Type                                                                                | Output Normalization Action Type                           |
-|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
-| `date()` - Converts an input to a Date object      | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value   |
-|                                                    | `toDateString()` - Formats a Date object to a date string                                                 | `toNull()` - Converts invalid value to null                |
-|                                                    | `toLocaleDateString()` - Formats a Date object or time value to a localized date                          | `toUndefined()` - Converts invalid value to undefined      |
-|                                                    | `toLocaleTimeString()` - Formats a Date object or time value to a localized time                          |                                                            |
-|                                                    | `toMaxValue()` - Limits a date value to a maximum date value                                              |                                                            |
-|                                                    | `toMinValue()` - Limits a date value to a minimum date value                                              |                                                            |
-|                                                    | `toTimeString()` - Formats a time value to a string                                                       |                                                            |
-| `boolean()` - Converts an input to a boolean value |                                                                                                           | `toDefault()` - Converts a null value to a default value   |
-|                                                    |                                                                                                           | `toUndefined()` - Converts a null value to undefined       |
-| `number()` - Converts an input to a number         | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value   |
-|                                                    | `toExponential()` - Converts a number to exponential notation                                             | `toNull()` - Converts 0/0.0 value to null                  |
-|                                                    | `toFixed()` - Formats a number using fixed-point notation                                                 | `toUndefined()` - Converts 0/0.0/null value to undefined   |
-|                                                    | `toFloat()` - Ensures a number is treated as a float                                                      |                                                            |
-|                                                    | `toInteger()` - Converts a number to an integer                                                           |                                                            |
-|                                                    | `toLocaleNumberString()` - Formats a number value to a localized number string                            |                                                            |
-|                                                    | `toMaxValue()` - Limits a number value to a given maximum value                                           |                                                            |
-|                                                    | `toMinValue()` - Limits a number value to a given minimum value                                           |                                                            |
-|                                                    | `toPrecision()` - Returns a string representing a number to specified precision                           |                                                            |
-| `string()` - Converts an input to a string         | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value   |
-|                                                    | `decodeURI()` - Decodes a URI-encoded string                                                              | `toEmpty()` - Converts empty/null value to an empty string |
-|                                                    | `encodeURI()` - Encodes a string as a URI component                                                       | `toNull()` - Converts empty value to null                  |
-|                                                    | `normalize()` - Normalizes a Unicode string                                                               | `toUndefined()` - Converts empty/null value to undefined   |
-|                                                    | `padEnd()` - Pads a string at the end                                                                     |                                                            |
-|                                                    | `padStart()` - Pads a string at the start                                                                 |                                                            |
-|                                                    | `repeat()` - Repeats a string a specified number of times                                                 |                                                            |
-|                                                    | `replace()` - Replaces a substring with another                                                           |                                                            |
-|                                                    | `slice()` - Extracts a section of a string and returns it as a new string                                 |                                                            |
-|                                                    | `stripDiacritics()` - Removes the diacritical marks                                                       |                                                            |
-|                                                    | `stripMultiSpaces()` - Removes multiple consecutive spaces                                                |                                                            |
-|                                                    | `stripNewlines()` - Removes all the newline characters                                                    |                                                            |
-|                                                    | `stripSpaces()` - Removes all the spaces                                                                  |                                                            |
-|                                                    | `stripTags()` - Removes the HTML/XML tags                                                                 |                                                            |
-|                                                    | `substring()` - Returns the part of a string between two indices                                          |                                                            |
-|                                                    | `toAlpha()` - Removes all the non-alphabetic characters                                                   |                                                            |
-|                                                    | `toAlphanumeric()` - Removes all the non-alphanumeric characters                                          |                                                            |
-|                                                    | `toCamelCase()` - Converts a string to a camelCase format                                                 |                                                            |
-|                                                    | `toCapitalCase()` - Converts the string so that each word starts with uppercase                           |                                                            |
-|                                                    | `toDigits()` - Extracts only the digits from a string                                                     |                                                            |
-|                                                    | `toDotCase()` - Converts the string to a dot.case format                                                  |                                                            |
-|                                                    | `toKebabCase()` - Converts the string to a kebab-case format                                              |                                                            |
-|                                                    | `toLowerCase()` - Converts a string to lowercase                                                          |                                                            |
-|                                                    | `toPascalCase()` - Converts the string to a PascalCase format                                             |                                                            |
-|                                                    | `toSnakeCase()` - Converts the string to a snake_case format                                              |                                                            |
-|                                                    | `toUpperCase()` - Converts a string to uppercase                                                          |                                                            |
-|                                                    | `toWellFormed()` - Replaces all lone surrogates in a string with the Unicode replacement character U+FFFD |                                                            |
-|                                                    | `trim()` - Removes whitespace from both ends                                                              |                                                            |
-|                                                    | `trimEnd()` - Removes whitespace from the end                                                             |                                                            |
-|                                                    | `trimStart()` - Removes whitespace from the start                                                         |                                                            |
+| Conversion Type                                    | Transformation Action Type                                                                                | Output Normalization Action Type                         |
+|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `array()` - Converts an input to an Array          |                                                                                                           | `toDefault()` - Converts a null value to a default value |
+| `date()` - Converts an input to a Date object      | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value |
+|                                                    | `toDateString()` - Formats a Date object to a date string                                                 | `toNull()` - Converts invalid value to null              |
+|                                                    | `toLocaleDateString()` - Formats a Date object or time value to a localized date                          | `toUndefined()` - Converts invalid value to undefined    |
+|                                                    | `toLocaleTimeString()` - Formats a Date object or time value to a localized time                          |                                                          |
+|                                                    | `toMaxValue()` - Limits a date value to a maximum date value                                              |                                                          |
+|                                                    | `toMinValue()` - Limits a date value to a minimum date value                                              |                                                          |
+|                                                    | `toTimeString()` - Formats a time value to a string                                                       |                                                          |
+| `boolean()` - Converts an input to a boolean value |                                                                                                           | `toDefault()` - Converts a null value to a default value |
+|                                                    |                                                                                                           | `toUndefined()` - Converts a null value to undefined     |
+| `number()` - Converts an input to a number         | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value |
+|                                                    | `toExponential()` - Converts a number to exponential notation                                             | `toNull()` - Converts 0/0.0 value to null                |
+|                                                    | `toFixed()` - Formats a number using fixed-point notation                                                 | `toUndefined()` - Converts 0/0.0/null value to undefined |
+|                                                    | `toFloat()` - Ensures a number is treated as a float                                                      |                                                          |
+|                                                    | `toInteger()` - Converts a number to an integer                                                           |                                                          |
+|                                                    | `toLocaleNumberString()` - Formats a number value to a localized number string                            |                                                          |
+|                                                    | `toMaxValue()` - Limits a number value to a given maximum value                                           |                                                          |
+|                                                    | `toMinValue()` - Limits a number value to a given minimum value                                           |                                                          |
+|                                                    | `toPrecision()` - Returns a string representing a number to specified precision                           |                                                          |
+| `string()` - Converts an input to a string         | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value |
+|                                                    | `decodeURI()` - Decodes a URI-encoded string                                                              | `toNull()` - Converts empty value to null                |
+|                                                    | `encodeURI()` - Encodes a string as a URI component                                                       | `toUndefined()` - Converts empty/null value to undefined |
+|                                                    | `normalize()` - Normalizes a Unicode string                                                               |                                                          |
+|                                                    | `padEnd()` - Pads a string at the end                                                                     |                                                          |
+|                                                    | `padStart()` - Pads a string at the start                                                                 |                                                          |
+|                                                    | `repeat()` - Repeats a string a specified number of times                                                 |                                                          |
+|                                                    | `replace()` - Replaces a substring with another                                                           |                                                          |
+|                                                    | `slice()` - Extracts a section of a string and returns it as a new string                                 |                                                          |
+|                                                    | `stripDiacritics()` - Removes the diacritical marks                                                       |                                                          |
+|                                                    | `stripMultiSpaces()` - Removes multiple consecutive spaces                                                |                                                          |
+|                                                    | `stripNewlines()` - Removes all the newline characters                                                    |                                                          |
+|                                                    | `stripSpaces()` - Removes all the spaces                                                                  |                                                          |
+|                                                    | `stripTags()` - Removes the HTML/XML tags                                                                 |                                                          |
+|                                                    | `substring()` - Returns the part of a string between two indices                                          |                                                          |
+|                                                    | `toAlpha()` - Removes all the non-alphabetic characters                                                   |                                                          |
+|                                                    | `toAlphanumeric()` - Removes all the non-alphanumeric characters                                          |                                                          |
+|                                                    | `toCamelCase()` - Converts a string to a camelCase format                                                 |                                                          |
+|                                                    | `toCapitalCase()` - Converts the string so that each word starts with uppercase                           |                                                          |
+|                                                    | `toDigits()` - Extracts only the digits from a string                                                     |                                                          |
+|                                                    | `toDotCase()` - Converts the string to a dot.case format                                                  |                                                          |
+|                                                    | `toKebabCase()` - Converts the string to a kebab-case format                                              |                                                          |
+|                                                    | `toLowerCase()` - Converts a string to lowercase                                                          |                                                          |
+|                                                    | `toPascalCase()` - Converts the string to a PascalCase format                                             |                                                          |
+|                                                    | `toSnakeCase()` - Converts the string to a snake_case format                                              |                                                          |
+|                                                    | `toUpperCase()` - Converts a string to uppercase                                                          |                                                          |
+|                                                    | `toWellFormed()` - Replaces all lone surrogates in a string with the Unicode replacement character U+FFFD |                                                          |
+|                                                    | `trim()` - Removes whitespace from both ends                                                              |                                                          |
+|                                                    | `trimEnd()` - Removes whitespace from the end                                                             |                                                          |
+|                                                    | `trimStart()` - Removes whitespace from the start                                                         |                                                          |
 
 These actions can be chained and combined as needed using `pipe()` function to create complex transformation schemas for converting and processing input data.
 

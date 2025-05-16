@@ -8,6 +8,14 @@ export function boolean(): BooleanConversion {
       return null;
     }
 
+    if (typeof input === "boolean") {
+      return Boolean(input);
+    }
+
+    if (typeof input === "number") {
+      return 1 === input;
+    }
+
     if (typeof input === "string") {
       const lowered = input.trim().toLowerCase();
 
@@ -18,12 +26,6 @@ export function boolean(): BooleanConversion {
       if (lowered === "false" || lowered === "0" || lowered === "no") {
         return false;
       }
-
-      return null;
-    }
-
-    if (typeof input === "number" || typeof input === "boolean") {
-      return Boolean(input);
     }
 
     return null;
