@@ -97,6 +97,7 @@ Below is an overview of all supported transformation actions.
 - `toCamelCase()` - Converts a string to a camelCase format
 - `toCapitalCase()` - Converts the string so that each word starts with an uppercase letter
 - `toDateString()` - Formats a Date object to a string
+- `toDefault()` - Converts null values to a default value
 - `toDigits()` - Extracts only the digits from a string
 - `toDotCase()` - Converts the string to a dot.case format
 - `toEmpty()` - Converts empty/invalid values to an empty string

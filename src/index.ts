@@ -18,6 +18,7 @@ export * from "./actions/toAlphanumeric.ts";
 export * from "./actions/toCamelCase.ts";
 export * from "./actions/toCapitalCase.ts";
 export * from "./actions/toDateString.ts";
+export * from "./actions/toDefault.ts";
 export * from "./actions/toDigits.ts";
 export * from "./actions/toDotCase.ts";
 export * from "./actions/toEmpty.ts";

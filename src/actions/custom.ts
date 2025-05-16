@@ -2,14 +2,9 @@ import type { Action } from "../types.ts";
 
 export type CustomAction<TInput, TOutput> = Action<TInput, TOutput>;
 
-export function custom<TInput, TOutput>(
-  operation: (input: TInput) => TOutput,
-): CustomAction<TInput, TOutput> {
-  return (input) => {
-    if (typeof operation === "function") {
-      return operation(input);
-    }
-
-    return input as unknown as TOutput;
-  };
+export function custom<
+  TInput extends Date | boolean | number | string | null,
+  TOutput = TInput,
+>(operation: (input: TInput) => TOutput): CustomAction<TInput, TOutput> {
+  return (input) => operation(input);
 }

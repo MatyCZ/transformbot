@@ -4,7 +4,7 @@ export type ToUndefinedAction<TInput, TOutput> = Action<TInput, TOutput>;
 
 export function toUndefined<
   TInput extends Date | boolean | number | string | null,
-  TOutput = TInput,
+  TOutput = NonNullable<TInput>,
 >(): ToUndefinedAction<TInput, TOutput | undefined> {
   return (input) => {
     if (input === null) {
@@ -23,16 +23,7 @@ export function toUndefined<
       return undefined;
     }
 
-    if (
-      typeof input === "string" &&
-      (input === "" ||
-        input === "0" ||
-        input === "0.0" ||
-        input === "1970-01-01" ||
-        input === "00:00" ||
-        input === "00:00:00" ||
-        input === "00:00:00.000")
-    ) {
+    if (typeof input === "string" && input === "") {
       return undefined;
     }
 
