@@ -13,7 +13,15 @@ export function boolean(): BooleanConversion {
     }
 
     if (typeof input === "number") {
-      return 1 === input;
+      if (1 === input) {
+        return true;
+      }
+
+      if (0 === input) {
+        return false;
+      }
+
+      return null;
     }
 
     if (typeof input === "string") {

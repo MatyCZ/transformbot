@@ -3,7 +3,7 @@ import type { Action } from "../types.ts";
 export type ToUndefinedAction<TInput, TOutput> = Action<TInput, TOutput>;
 
 export function toUndefined<
-  TInput extends Date | boolean | number | string | null,
+  TInput,
   TOutput = NonNullable<TInput>,
 >(): ToUndefinedAction<TInput, TOutput | undefined> {
   return (input) => {
@@ -20,6 +20,10 @@ export function toUndefined<
     }
 
     if (typeof input === "string" && input === "") {
+      return undefined;
+    }
+
+    if (Array.isArray(input) && input.length === 0) {
       return undefined;
     }
 

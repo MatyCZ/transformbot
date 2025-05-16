@@ -1,11 +1,11 @@
 import { Conversion, type Transformation } from "../types.ts";
 import { transform } from "../methods/transform.ts";
 
-export type ArrayConversion = Conversion<unknown, unknown[] | null>;
+export type ArrayConversion<TInput, TOutput> = Conversion<TInput, TOutput>;
 
 export function array<T extends Transformation>(
   transformation: T,
-): Conversion<unknown, NonNullable<ReturnType<T>>[] | null> {
+): ArrayConversion<unknown, NonNullable<ReturnType<T>>[] | null> {
   return (input) => {
     if (input === null || input === undefined || input === "") {
       return null;
@@ -21,7 +21,7 @@ export function array<T extends Transformation>(
         }
       }
 
-      return values.length > 0 ? values : null;
+      return values;
     }
 
     return null;
