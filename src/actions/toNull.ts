@@ -3,7 +3,7 @@ import type { Action } from "../types.ts";
 export type ToNullAction<TInput, TOutput> = Action<TInput, TOutput>;
 
 export function toNull<
-  TInput extends Date | boolean | number | string | undefined | null,
+  TInput extends Date | boolean | number | string | null,
   TOutput = TInput,
 >(): ToNullAction<TInput, TOutput | null> {
   return (input) => {

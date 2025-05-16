@@ -83,12 +83,15 @@ Below is an overview of all supported transformation actions.
 - `normalize()` - Normalizes a Unicode string
 - `padEnd()` - Pads a string at the end
 - `padStart()` - Pads a string at the start
+- `repeat()` - Repeats a string a specified number of times
 - `replace()` - Replaces a substring with another
+- `slice()` - Extracts a section of a string and returns it as a new string
 - `stripDiacritics()` - Removes the diacritical marks
 - `stripMultiSpaces()` - Removes the multiple consecutive spaces
 - `stripNewlines()` - Removes all the newline characters
 - `stripSpaces()` - Removes all the spaces
 - `stripTags()` - Removes the HTML/XML tags
+- `substring()` - Returns the part of a string between two indices
 - `toAlpha()` - Removes all the non-alphabetic characters
 - `toAlphanumeric()` - Removes all the non-alphanumeric characters
 - `toCamelCase()` - Converts a string to a camelCase format
@@ -102,6 +105,9 @@ Below is an overview of all supported transformation actions.
 - `toFloat()` - Ensures a number is treated as a float
 - `toInteger()` - Converts a number to an integer
 - `toKebabCase()` - Converts a string to a kebab-case format
+- `toLocaleDateString()` - Formats a Date object or time value to a localized date string
+- `toLocaleNumberString()` - Formats a number value to a localized number string
+- `toLocaleTimeString()` - Formats a Date object or time value to a localized time string
 - `toLowerCase()` - Converts a string to lowercase
 - `toMaxValue()` - Limits a value to a maximum
 - `toMinValue()` - Limits a value to a minimum
