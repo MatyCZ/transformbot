@@ -15,10 +15,6 @@ export function toUndefined<
       return undefined;
     }
 
-    if (typeof input === "boolean" && !input) {
-      return undefined;
-    }
-
     if (typeof input === "number" && (input === 0 || input === 0.0)) {
       return undefined;
     }
