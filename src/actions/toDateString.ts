@@ -10,7 +10,7 @@ export function toDateString(): ToDateStringAction {
     }
 
     return (
-      input.getFullYear() +
+      addLeadingZeros(input.getFullYear(), 4) +
       "-" +
       addLeadingZeros(input.getMonth() + 1, 2) +
       "-" +
