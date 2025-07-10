@@ -120,6 +120,7 @@ const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 |                                                    | `trim()` - Removes whitespace from both ends                                                              |                                                          |
 |                                                    | `trimEnd()` - Removes whitespace from the end                                                             |                                                          |
 |                                                    | `trimStart()` - Removes whitespace from the start                                                         |                                                          |
+|                                                    | `truncate()` - Shortens a string to a specified maximum length with an optional suffix                    |                                                          |
 
 These actions can be chained and combined as needed using `pipe()` function to create complex transformation schemas for converting and processing input data.
 
