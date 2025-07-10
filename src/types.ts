@@ -1,6 +1,7 @@
 export type Action<TInput = unknown, TOutput = unknown> = (
   input: TInput,
 ) => TOutput;
+
 export type Conversion<TInput = unknown, TOutput = unknown> = (
   input: TInput,
 ) => TOutput;

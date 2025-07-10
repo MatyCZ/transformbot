@@ -2,11 +2,17 @@ import type { Action } from "../types.ts";
 
 export type ToAlphaAction = Action<string | null, string | null>;
 
-export function toAlpha(ignore?: RegExp | string): ToAlphaAction {
+export interface ToAlphaOptions {
+  ignore: RegExp | string;
+}
+
+export function toAlpha(options?: ToAlphaOptions): ToAlphaAction {
   return (input) => {
     if (input === null) {
       return null;
     }
+
+    const ignore = options?.ignore;
 
     let ignorePattern = "";
 

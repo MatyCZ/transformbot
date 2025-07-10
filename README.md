@@ -1,7 +1,8 @@
 ## Key Features
 
 **✅ Transforms to Primitive Types**\
-Converts input values to `array`, `boolean`, `number`, and `string`, and also supports conversion to JavaScript `Date` objects.
+Converts input values to `array`, `boolean`, `number`, and `string`, and also supports conversion to JavaScript `Date`
+objects.
 
 **🧼 Rich Set of Transformation Actions**\
 Includes cleaning, formatting, normalization, trimming, type conversion, and more.
@@ -91,13 +92,19 @@ const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 |                                                    | `toMinValue()` - Limits a number value to a given minimum value                                           |                                                          |
 |                                                    | `toPrecision()` - Returns a string representing a number to specified precision                           |                                                          |
 | `string()` - Converts an input to a string         | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value |
-|                                                    | `decodeURI()` - Decodes a URI-encoded string                                                              | `toNull()` - Converts empty value to null                |
-|                                                    | `encodeURI()` - Encodes a string as a URI component                                                       | `toUndefined()` - Converts empty/null value to undefined |
+|                                                    | `decodeBase64()` - Decodes a Base64-encoded string                                                        | `toNull()` - Converts empty value to null                |
+|                                                    | `decodeHTML()` - Decodes HTML entities in string                                                          | `toUndefined()` - Converts empty/null value to undefined |
+|                                                    | `decodeURI()` - Decodes a URI-encoded string                                                              |                                                          |
+|                                                    | `encodeBase64()` - Encodes a string as Base64                                                             |                                                          |
+|                                                    | `encodeHTML()` - Encodes HTML entities in a string                                                        |                                                          |
+|                                                    | `encodeURI()` - Encodes a string as a URI component                                                       |                                                          |
+|                                                    | `mask()` - Masks parts of a string with a character                                                       |                                                          |
 |                                                    | `normalize()` - Normalizes a Unicode string                                                               |                                                          |
 |                                                    | `padEnd()` - Pads a string at the end                                                                     |                                                          |
 |                                                    | `padStart()` - Pads a string at the start                                                                 |                                                          |
 |                                                    | `repeat()` - Repeats a string a specified number of times                                                 |                                                          |
 |                                                    | `replace()` - Replaces a substring with another                                                           |                                                          |
+|                                                    | `sanitizeText()` - Removes potentially dangerous or unwanted text content                                 |                                                          |
 |                                                    | `slice()` - Extracts a section of a string and returns it as a new string                                 |                                                          |
 |                                                    | `stripDiacritics()` - Removes the diacritical marks                                                       |                                                          |
 |                                                    | `stripMultiSpaces()` - Removes multiple consecutive spaces                                                |                                                          |
@@ -122,7 +129,8 @@ const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 |                                                    | `trimStart()` - Removes whitespace from the start                                                         |                                                          |
 |                                                    | `truncate()` - Shortens a string to a specified maximum length with an optional suffix                    |                                                          |
 
-These actions can be chained and combined as needed using `pipe()` function to create complex transformation schemas for converting and processing input data.
+These actions can be chained and combined as needed using `pipe()` function to create complex transformation schemas for
+converting and processing input data.
 
 ## Methods Overview
 
@@ -131,10 +139,15 @@ These actions can be chained and combined as needed using `pipe()` function to c
 
 ## Credits
 
-I'm grateful to the [valibot.dev](https://valibot.dev/) library's creators for their outstanding work. It's been a source of inspiration.
+I'm grateful to the [valibot.dev](https://valibot.dev/) library's creators for their outstanding work. It's been a
+source of inspiration.
 
 [license-image]: https://img.shields.io/badge/License-MIT-brightgreen.svg
+
 [license-url]: https://opensource.org/licenses/MIT
+
 [npm-image]: https://img.shields.io/npm/v/transformbotb.svg
+
 [npm-url]: https://npmjs.org/package/transformbot
+
 [downloads-image]: https://img.shields.io/npm/dm/transformbotb.svg
