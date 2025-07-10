@@ -1,7 +1,7 @@
 {
   "name": "transformbot",
   "description": "The modular and type-safe schema library for transforming values",
-  "version": "0.16.2",
+  "version": "0.18.0",
   "license": "MIT",
   "author": "Matej Szendi",
   "repository": {
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
+    "@types/node": "^24.0.13",
     "eslint": "^9.26.0",
     "prettier": "^3.5.3",
     "tsup": "^8.4.0",
