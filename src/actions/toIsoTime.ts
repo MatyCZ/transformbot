@@ -1,16 +1,14 @@
 import type { Action } from "../types.ts";
 import { addLeadingZeros } from "../utils/addLeadingZeros.ts";
 
-export type ToTimeStringAction = Action<Date | null, string | null>;
+export type ToIsoTimeAction = Action<Date | null, string | null>;
 
 export interface ToTimeStringOptions {
   useSeconds?: boolean;
   useMiliseconds?: boolean;
 }
 
-export function toTimeString(
-  options?: ToTimeStringOptions,
-): ToTimeStringAction {
+export function toIsoTime(options?: ToTimeStringOptions): ToIsoTimeAction {
   return (input) => {
     if (input === null) {
       return null;

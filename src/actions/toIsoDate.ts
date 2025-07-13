@@ -1,9 +1,9 @@
 import type { Action } from "../types.ts";
 import { addLeadingZeros } from "../utils/addLeadingZeros.ts";
 
-export type ToDateStringAction = Action<Date | null, string | null>;
+export type ToIsoDateAction = Action<Date | null, string | null>;
 
-export function toDateString(): ToDateStringAction {
+export function toIsoDate(): ToIsoDateAction {
   return (input) => {
     if (input === null) {
       return null;

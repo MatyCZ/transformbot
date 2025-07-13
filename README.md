@@ -57,11 +57,11 @@ const AgeSchema = tb.number();
 const AlphanumericUppercaseSchema = tb.pipe(tb.string(), tb.toUpperCase(), tb.toAlphanumeric(), tb.toEmpty());
 const BooleanSchema = tb.pipe(tb.boolean(), tb.toNull());
 const DateSchema = tb.pipe(tb.date(), tb.toNull());
-const DateStringSchema = tb.pipe(tb.date(), tb.toDateString(), tb.toNull());
+const DateStringSchema = tb.pipe(tb.date(), tb.toIsoDate(), tb.toNull());
 const EmailSchema = tb.pipe(tb.string(), tb.trim(), tb.stripTags(), tb.stripNewlines(), tb.stripSpaces(), tb.stripDiacritics(), tb.toNull());
 const FloatSchema = tb.pipe(tb.number(), tb.toFloat());
 const TimeSchema = tb.pipe(tb.time(), tb.toNull());
-const TimeStringSchema = tb.pipe(tb.time(), tb.toTimeString(), tb.toNull());
+const TimeStringSchema = tb.pipe(tb.time(), tb.toIsoTime(), tb.toNull());
 const VehicleVINSchema = tb.pipe(tb.string(), tb.toAlphanumeric(), tb.toUpperCase(), tb.toNull());
 const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 ```
@@ -76,12 +76,12 @@ const UsernameSchema = tb.pipe(tb.string(), tb.trim());
 | `boolean()` - Converts an input to a boolean value |                                                                                                           | `toDefault()` - Converts a null value to a default value |
 |                                                    |                                                                                                           | `toUndefined()` - Converts a null value to undefined     |
 | `date()` - Converts an input to a Date object      | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value |
-|                                                    | `toDateString()` - Formats a Date object to a date string                                                 | `toNull()` - Converts invalid value to null              |
-|                                                    | `toLocaleDateString()` - Formats a Date object or time value to a localized date                          | `toUndefined()` - Converts invalid value to undefined    |
+|                                                    | `toIsoDate()` - Formats a Date object to an ISO date string                                               | `toNull()` - Converts invalid value to null              |
+|                                                    | `toIsoTime()` - Formats a time value to an ISO string                                                     | `toUndefined()` - Converts invalid value to undefined    |
+|                                                    | `toLocaleDateString()` - Formats a Date object or time value to a localized date                          |                                                          |
 |                                                    | `toLocaleTimeString()` - Formats a Date object or time value to a localized time                          |                                                          |
 |                                                    | `toMaxValue()` - Limits a date value to a maximum date value                                              |                                                          |
 |                                                    | `toMinValue()` - Limits a date value to a minimum date value                                              |                                                          |
-|                                                    | `toTimeString()` - Formats a time value to a string                                                       |                                                          |
 | `number()` - Converts an input to a number         | `custom()` - Applies a custom transformation function                                                     | `toDefault()` - Converts a null value to a default value |
 |                                                    | `toExponential()` - Converts a number to exponential notation                                             | `toNull()` - Converts 0/0.0 value to null                |
 |                                                    | `toFixed()` - Formats a number using fixed-point notation                                                 | `toUndefined()` - Converts 0/0.0/null value to undefined |
