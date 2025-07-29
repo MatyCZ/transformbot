@@ -1,4 +1,4 @@
-import { Conversion } from "../types.ts";
+import {Conversion} from "../types.ts";
 
 export type DateConversion = Conversion<unknown, Date | null>;
 
@@ -148,7 +148,7 @@ function parseByFormat(input: string, format: string) {
 
   // Vytvořte regulární výraz z formátu
   let regexString = "^";
-  let tokenPositions: { token: string; position: number }[] = [];
+  const tokenPositions: { token: string; position: number }[] = [];
   let position = 1;
 
   for (const part of formatParts) {
