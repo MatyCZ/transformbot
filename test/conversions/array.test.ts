@@ -1,57 +1,83 @@
 import { describe, expect, it } from "vitest";
-import { boolean } from "../../src/conversions/boolean.ts";
+import { array } from "../../src/conversions/array.ts";
+import { number } from "../../src/conversions/number.ts";
+import { string } from "../../src/conversions/string.ts";
 
-const convert = boolean();
+const convert = array(number());
 
 // ARRAY
-describe("Boolean conversions from array", () => {
-  it("should convert array `[]` to null", () => {
-    expect(convert([])).toBeNull();
+describe("Array conversions from array", () => {
+  it("should convert array `[]` to array `[]`", () => {
+    const input: number[] = [];
+
+    expect(array(number())(input)).toStrictEqual(input);
+  });
+
+  it("should convert array `[0, 50, 100]` to array `[0, 50, 100]`", () => {
+    const input: number[] = [0, 50, 100];
+
+    expect(array(number())(input)).toStrictEqual(input);
+  });
+
+  it("should convert array `['0', '50', '100']` to array `[0, 50, 100]`", () => {
+    const input: string[] = ["0", "50", "100"];
+
+    expect(array(number())(input)).toStrictEqual([0, 50, 100]);
+  });
+
+  it("should convert array `[0, 50, 100]` to array `['0', '50', '100']`", () => {
+    const input: number[] = [0, 50, 100];
+
+    expect(array(string())(input)).toStrictEqual(["0", "50", "100"]);
+  });
+
+  it("should convert array `['0', '50', '100']` to array `['0', '50', '100']`", () => {
+    const input: string[] = ["0", "50", "100"];
+
+    expect(array(string())(input)).toStrictEqual(input);
   });
 });
 
 // BIGINT
-describe("Boolean conversions from BigInt", () => {
+describe("Array conversions from BigInt", () => {
   it("should convert BigInt `100` to null", () => {
     expect(convert(BigInt(100))).toBeNull();
   });
 });
 
 // BOOLEAN
-describe("Boolean conversions from boolean", () => {
-  it("should convert boolean `true` to bollean `true`", () => {
-    expect(convert(true)).toBeTruthy();
+describe("Array conversions from boolean", () => {
+  it("should convert boolean `true` to null", () => {
+    expect(convert(true)).toBeNull();
   });
 
-  it("should convert boolean `false` to boolean `false`", () => {
-    expect(convert(false)).toBeFalsy();
+  it("should convert boolean `false` to null", () => {
+    expect(convert(false)).toBeNull();
   });
 });
 
 // DATE
-describe("Boolean conversions from Date", () => {
-  it("should convert Date `` to null", () => {
+describe("Array conversions from Date", () => {
+  it("should convert Date to null", () => {
     expect(convert(new Date())).toBeNull();
   });
 });
 
 // NULL
-describe("Boolean conversions from null", () => {
-  const convert = boolean();
-
+describe("Array conversions from null", () => {
   it("should convert null to null", () => {
     expect(convert(null)).toBeNull();
   });
 });
 
 // NUMBER
-describe("Boolean conversions from number", () => {
-  it("should convert number `0` to boolean `false`", () => {
-    expect(convert(0)).toBeFalsy();
+describe("Array conversions from number", () => {
+  it("should convert number `0` to null", () => {
+    expect(convert(0)).toBeNull();
   });
 
-  it("should convert number `1` to boolean `true`", () => {
-    expect(convert(1)).toBeTruthy();
+  it("should convert number `1` to null", () => {
+    expect(convert(1)).toBeNull();
   });
 
   it("should convert number `-1` to null", () => {
@@ -128,23 +154,24 @@ describe("Boolean conversions from number", () => {
 });
 
 // OBJECT
-describe("Boolean conversions from object", () => {
+describe("Array conversions from object", () => {
   it("should convert object `{}` to null", () => {
     expect(convert({})).toBeNull();
   });
 });
 
-describe("Boolean conversions from string", () => {
+// STRING
+describe("Array conversions from string", () => {
   it("should convert string `` to null", () => {
     expect(convert("")).toBeNull();
   });
 
-  it("should convert string `0` to boolean `false`", () => {
-    expect(convert("0")).toBeFalsy();
+  it("should convert string `0` to null", () => {
+    expect(convert("0")).toBeNull();
   });
 
-  it("should convert string `1` to boolean `true`", () => {
-    expect(convert("1")).toBeTruthy();
+  it("should convert string `1` to null", () => {
+    expect(convert("1")).toBeNull();
   });
 
   it("should convert string `-1` to null", () => {
@@ -239,20 +266,20 @@ describe("Boolean conversions from string", () => {
     expect(convert("abc   xyz")).toBeNull();
   });
 
-  it("should convert string `false` to boolean `false`", () => {
-    expect(convert("false")).toBeFalsy();
+  it("should convert string `false` to null", () => {
+    expect(convert("false")).toBeNull();
   });
 
-  it("should convert string `no` to boolean `false`", () => {
-    expect(convert("no")).toBeFalsy();
+  it("should convert string `no` to null", () => {
+    expect(convert("no")).toBeNull();
   });
 
-  it("should convert string `true` to boolean `true`", () => {
-    expect(convert("true")).toBeTruthy();
+  it("should convert string `true` to null", () => {
+    expect(convert("true")).toBeNull();
   });
 
-  it("should convert string `yes` to boolean `true`", () => {
-    expect(convert("yes")).toBeTruthy();
+  it("should convert string `yes` to null", () => {
+    expect(convert("yes")).toBeNull();
   });
 
   it("should convert string `18.09.2020` to null", () => {
@@ -333,7 +360,7 @@ describe("Boolean conversions from string", () => {
 });
 
 // UNDEFINED
-describe("Boolean conversions from undefined", () => {
+describe("Array conversions from undefined", () => {
   it("should convert undefined to null", () => {
     expect(convert(undefined)).toBeNull();
   });

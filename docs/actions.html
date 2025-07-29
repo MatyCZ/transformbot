@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actions - TransformBot</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary-color: #0d6efd;
+      --secondary-color: #f8f9fa;
+      --dark-color: #212529;
+      --light-color: #f8f9fa;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark-color);
+    }
+    .hero {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+    }
+    .navbar {
+      background-color: var(--dark-color);
+    }
+    pre {
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      color: #d63384;
+    }
+    .footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+    .sidebar {
+      position: sticky;
+      top: 20px;
+    }
+    .sidebar .nav-link {
+      padding: 0.25rem 0;
+      color: var(--dark-color);
+    }
+    .sidebar .nav-link:hover, .sidebar .nav-link.active {
+      color: var(--primary-color);
+    }
+    .example-box {
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-group {
+      margin-bottom: 3rem;
+    }
+    .section-group h3 {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #dee2e6;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="./index.html">TransformBot</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./conversions.html">Conversions</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./actions.html">Actions</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://github.com/MatyCZ/transformbot" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Transformation Actions</h1>
+      <p class="lead">Powerful operations for manipulating and formatting data in TransformBot</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="sidebar">
+          <nav class="nav flex-column">
+            <a class="nav-link" href="#overview">Overview</a>
+            <a class="nav-link" href="#string-actions">String Actions</a>
+            <a class="nav-link" href="#number-actions">Number Actions</a>
+            <a class="nav-link" href="#date-actions">Date Actions</a>
+            <a class="nav-link" href="#normalization-actions">Normalization Actions</a>
+            <a class="nav-link" href="#custom-actions">Custom Actions</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <section id="overview" class="mb-5">
+          <h2>Overview</h2>
+          <p>
+            Transformation actions are functions that modify, format, or normalize data without changing its base type.
+            They are designed to be composable and can be chained together using the <code>pipe()</code> function.
+          </p>
+          <p>
+            Actions are organized into several categories based on the type of data they operate on and the transformations they perform:
+          </p>
+          <ul>
+            <li><strong>String Actions</strong> - For text manipulation, formatting, and cleaning</li>
+            <li><strong>Number Actions</strong> - For numeric formatting and range constraints</li>
+            <li><strong>Date Actions</strong> - For date formatting and manipulation</li>
+            <li><strong>Normalization Actions</strong> - For handling edge cases like null values</li>
+            <li><strong>Custom Actions</strong> - For creating your own transformations</li>
+          </ul>
+        </section>
+
+        <section id="string-actions" class="section-group">
+          <h3>String Actions</h3>
+          <p>These actions operate on string values, providing various text transformations and formatting operations.</p>
+
+          <div class="mb-5">
+            <h4>Text Case Transformations</h4>
+
+            <div class="mb-4">
+              <h5>toUpperCase()</h5>
+              <p>Converts a string to uppercase.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toUpperCase()), "hello");
+// result: "HELLO"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toLowerCase()</h5>
+              <p>Converts a string to lowercase.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toLowerCase()), "HELLO");
+// result: "hello"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toCapitalCase()</h5>
+              <p>Converts a string so that each word starts with uppercase.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toCapitalCase()), "hello world");
+// result: "Hello World"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toCamelCase()</h5>
+              <p>Converts a string to camelCase format.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toCamelCase()), "hello world");
+// result: "helloWorld"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toPascalCase()</h5>
+              <p>Converts a string to PascalCase format.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toPascalCase()), "hello world");
+// result: "HelloWorld"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toSnakeCase()</h5>
+              <p>Converts a string to snake_case format.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toSnakeCase()), "hello world");
+// result: "hello_world"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toKebabCase()</h5>
+              <p>Converts a string to kebab-case format.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toKebabCase()), "hello world");
+// result: "hello-world"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toDotCase()</h5>
+              <p>Converts a string to dot.case format.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toDotCase()), "hello world");
+// result: "hello.world"</code></pre>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <h4>Whitespace Handling</h4>
+
+            <div class="mb-4">
+              <h5>trim()</h5>
+              <p>Removes whitespace from both ends of a string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.trim()), "  hello  ");
+// result: "hello"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>trimStart()</h5>
+              <p>Removes whitespace from the beginning of a string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.trimStart()), "  hello  ");
+// result: "hello  "</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>trimEnd()</h5>
+              <p>Removes whitespace from the end of a string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.trimEnd()), "  hello  ");
+// result: "  hello"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>stripMultiSpaces()</h5>
+              <p>Removes multiple consecutive spaces, replacing them with a single space.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.stripMultiSpaces()), "hello    world");
+// result: "hello world"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>stripSpaces()</h5>
+              <p>Removes all spaces from a string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.stripSpaces()), "hello world");
+// result: "helloworld"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>stripNewlines()</h5>
+              <p>Removes all newline characters from a string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.stripNewlines()), "hello\nworld");
+// result: "helloworld"</code></pre>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <h4>Character Filtering</h4>
+
+            <div class="mb-4">
+              <h5>toAlpha()</h5>
+              <p>Removes all non-alphabetic characters.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toAlpha()), "hello123");
+// result: "hello"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toAlphanumeric()</h5>
+              <p>Removes all non-alphanumeric characters.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toAlphanumeric()), "hello-123!");
+// result: "hello123"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toDigits()</h5>
+              <p>Extracts only digits from a string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toDigits()), "abc123def456");
+// result: "123456"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>stripTags()</h5>
+              <p>Removes HTML/XML tags from a string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.stripTags()), "&lt;p&gt;hello&lt;/p&gt;");
+// result: "hello"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>stripDiacritics()</h5>
+              <p>Removes diacritical marks from a string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.stripDiacritics()), "résumé");
+// result: "resume"</code></pre>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <h4>String Manipulation</h4>
+
+            <div class="mb-4">
+              <h5>padStart(length, padString)</h5>
+              <p>Pads the start of a string with a specified character until it reaches the desired length.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.padStart(5, "0")), "42");
+// result: "00042"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>padEnd(length, padString)</h5>
+              <p>Pads the end of a string with a specified character until it reaches the desired length.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.padEnd(5, "0")), "42");
+// result: "42000"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>repeat(count)</h5>
+              <p>Repeats a string a specified number of times.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.repeat(3)), "abc");
+// result: "abcabcabc"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>replace(searchValue, replaceValue)</h5>
+              <p>Replaces occurrences of a substring with another string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.replace("world", "universe")), "hello world");
+// result: "hello universe"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>slice(start, end)</h5>
+              <p>Extracts a section of a string and returns it as a new string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.slice(0, 5)), "hello world");
+// result: "hello"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>substring(start, end)</h5>
+              <p>Returns the part of a string between two indices.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.substring(6, 11)), "hello world");
+// result: "world"</code></pre>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <h4>Encoding/Decoding</h4>
+
+            <div class="mb-4">
+              <h5>encodeURI()</h5>
+              <p>Encodes a string as a URI component.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.encodeURI()), "hello world");
+// result: "hello%20world"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>decodeURI()</h5>
+              <p>Decodes a URI-encoded string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.decodeURI()), "hello%20world");
+// result: "hello world"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>normalize(form)</h5>
+              <p>Normalizes a Unicode string.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.normalize("NFC")), "\u0041\u030A");
+// result: "\u00C5" (Å)</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toWellFormed()</h5>
+              <p>Replaces all lone surrogates in a string with the Unicode replacement character U+FFFD.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toWellFormed()), problematicString);
+// result: String with surrogates replaced</code></pre>
+            </div>
+          </div>
+
+          <div class="example-box">
+            <h4>Combined String Actions Example</h4>
+            <p>This example demonstrates how to combine multiple string actions to create a username formatter:</p>
+            <pre><code>import * as tb from 'transformbot';
+
+// Create a reusable transformation for usernames
+const usernameFormatter = tb.pipe(
+  tb.string(),        // Ensure we're working with a string
+  tb.trim(),          // Remove surrounding whitespace
+  tb.stripTags(),     // Remove any HTML tags
+  tb.toAlphanumeric(),// Keep only alphanumeric characters
+  tb.toLowerCase(),   // Convert to lowercase
+  tb.toNull()         // Convert empty strings to null
+);
+
+// Example usage:
+const dirtyUsername = " &lt;script&gt;alert('hi')&lt;/script&gt;John Doe123! ";
+const cleanUsername = tb.transform(usernameFormatter, dirtyUsername);
+// Result: "johndoe123"</code></pre>
+          </div>
+        </section>
+
+        <section id="number-actions" class="section-group">
+          <h3>Number Actions</h3>
+          <p>These actions operate on numeric values, providing formatting and constraint options.</p>
+
+          <div class="mb-5">
+            <h4>Number Type Conversions</h4>
+
+            <div class="mb-4">
+              <h5>toInteger()</h5>
+              <p>Converts a number to an integer by removing the decimal part.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.number(), tb.toInteger()), 42.75);
+// result: 42</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toFloat()</h5>
+              <p>Ensures a number is treated as a floating-point number.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.number(), tb.toFloat()), 42);
+// result: 42.0</code></pre>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <h4>Number Formatting</h4>
+
+            <div class="mb-4">
+              <h5>toFixed(digits)</h5>
+              <p>Formats a number using fixed-point notation with a specified number of digits.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.number(), tb.toFixed(2)), 42.125);
+// result: "42.13"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toPrecision(precision)</h5>
+              <p>Returns a string representing a number to a specified precision.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.number(), tb.toPrecision(4)), 42.125);
+// result: "42.13"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toExponential(fractionDigits)</h5>
+              <p>Converts a number to exponential notation with a specified number of decimal places.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.number(), tb.toExponential(2)), 42000);
+// result: "4.20e+4"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toLocaleNumberString(locales, options)</h5>
+              <p>Formats a number according to locale-specific conventions.</p>
+              <pre><code>const result = tb.transform(
+  tb.pipe(
+    tb.number(), 
+    tb.toLocaleNumberString('en-US', { style: 'currency', currency: 'USD' })
+  ), 
+  42.5
+);
+// result: "$42.50"</code></pre>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <h4>Number Constraints</h4>
+
+            <div class="mb-4">
+              <h5>toMinValue(min)</h5>
+              <p>Ensures a number is at least a specified minimum value.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.number(), tb.toMinValue(10)), 5);
+// result: 10</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toMaxValue(max)</h5>
+              <p>Ensures a number is at most a specified maximum value.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.number(), tb.toMaxValue(100)), 150);
+// result: 100</code></pre>
+            </div>
+          </div>
+
+          <div class="example-box">
+            <h4>Combined Number Actions Example</h4>
+            <p>This example demonstrates how to combine multiple number actions to create a price formatter:</p>
+            <pre><code>import * as tb from 'transformbot';
+
+// Create a reusable transformation for currency values
+const priceFormatter = tb.pipe(
+  tb.number(),                // Ensure we're working with a number
+  tb.toMinValue(0),           // Ensure price is not negative
+  tb.toFixed(2),              // Format with 2 decimal places
+  tb.custom(price => `$${price}`) // Add currency symbol
+);
+
+// Example usage:
+const dirtyPrice = "24.9999";
+const formattedPrice = tb.transform(priceFormatter, dirtyPrice);
+// Result: "$25.00"</code></pre>
+          </div>
+        </section>
+
+        <section id="date-actions" class="section-group">
+          <h3>Date Actions</h3>
+          <p>These actions operate on Date objects, providing formatting and constraint options.</p>
+
+          <div class="mb-5">
+            <h4>Date Formatting</h4>
+
+            <div class="mb-4">
+              <h5>toDateString()</h5>
+              <p>Formats a Date object to a date string in the format "YYYY-MM-DD".</p>
+              <pre><code>const result = tb.transform(
+  tb.pipe(tb.date(), tb.toDateString()), 
+  new Date(2023, 5, 15)
+);
+// result: "2023-06-15"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toTimeString(useSeconds, useMilliseconds)</h5>
+              <p>Formats a Date object to a time string (e.g., "14:30:00").</p>
+              <pre><code>const result = tb.transform(
+  tb.pipe(tb.date(), tb.toTimeString(true, false)), 
+  new Date(2023, 5, 15, 14, 30, 45)
+);
+// result: "14:30:45"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toLocaleDateString(locales, options)</h5>
+              <p>Formats a Date object to a localized date string.</p>
+              <pre><code>const result = tb.transform(
+  tb.pipe(
+    tb.date(), 
+    tb.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+  ), 
+  new Date(2023, 5, 15)
+);
+// result: "Thursday, June 15, 2023"</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toLocaleTimeString(locales, options)</h5>
+              <p>Formats a Date object to a localized time string.</p>
+              <pre><code>const result = tb.transform(
+  tb.pipe(
+    tb.date(), 
+    tb.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+  ), 
+  new Date(2023, 5, 15, 14, 30)
+);
+// result: "02:30 PM"</code></pre>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <h4>Date Constraints</h4>
+
+            <div class="mb-4">
+              <h5>toMinValue(minDate)</h5>
+              <p>Ensures a date is not earlier than a specified minimum date.</p>
+              <pre><code>const minDate = new Date(2023, 0, 1);
+const result = tb.transform(
+  tb.pipe(tb.date(), tb.toMinValue(minDate)), 
+  new Date(2022, 11, 31)
+);
+// result: minDate (2023-01-01)</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toMaxValue(maxDate)</h5>
+              <p>Ensures a date is not later than a specified maximum date.</p>
+              <pre><code>const maxDate = new Date(2023, 11, 31);
+const result = tb.transform(
+  tb.pipe(tb.date(), tb.toMaxValue(maxDate)), 
+  new Date(2024, 0, 1)
+);
+// result: maxDate (2023-12-31)</code></pre>
+            </div>
+          </div>
+
+          <div class="example-box">
+            <h4>Combined Date Actions Example</h4>
+            <p>This example demonstrates how to combine multiple date actions to create a date validator and formatter:</p>
+            <pre><code>import * as tb from 'transformbot';
+
+// Create a reusable transformation for a birth date
+const birthDateFormatter = tb.pipe(
+  tb.date(),                                  // Ensure we're working with a Date
+  tb.toMinValue(new Date(1900, 0, 1)),       // Must be after 1900
+  tb.toMaxValue(new Date()),                 // Cannot be in the future
+  tb.toLocaleDateString('en-US', {           // Format as Month Day, Year
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }),
+  tb.toNull()                                // Convert invalid dates to null
+);
+
+// Example usage:
+const dirtyDate = "2000-06-15";
+const formattedDate = tb.transform(birthDateFormatter, dirtyDate);
+// Result: "June 15, 2000"</code></pre>
+          </div>
+        </section>
+
+        <section id="normalization-actions" class="section-group">
+          <h3>Normalization Actions</h3>
+          <p>These actions handle edge cases like null values, empty strings, or default values.</p>
+
+          <div class="mb-5">
+            <h4>Null/Empty Handling</h4>
+
+            <div class="mb-4">
+              <h5>toNull(options)</h5>
+              <p>Converts empty or zero values to null based on their type.</p>
+              <p>The following values are converted to null by default:</p>
+              <ul>
+                <li>Empty arrays: <code>[]</code></li>
+                <li>Date with time 0: <code>new Date(0)</code></li>
+                <li>Numbers: <code>0</code> and <code>0.0</code></li>
+                <li>Empty strings: <code>""</code></li>
+              </ul>
+              <p>You can customize this behavior with options:</p>
+              <ul>
+                <li><code>skipArray</code>: Don't convert empty arrays to null</li>
+                <li><code>skipDate</code>: Don't convert Date(0) to null</li>
+                <li><code>skipNumber</code>: Don't convert 0/0.0 to null</li>
+                <li><code>skipString</code>: Don't convert empty strings to null</li>
+              </ul>
+              <pre><code>// Default behavior
+const result1 = tb.transform(tb.pipe(tb.string(), tb.toNull()), "");
+// result1: null
+
+// With options
+const result2 = tb.transform(
+  tb.pipe(tb.number(), tb.toNull({ skipNumber: true })), 
+  0
+);
+// result2: 0 (not converted to null)</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toUndefined(options)</h5>
+              <p>Similar to <code>toNull()</code>, but converts values to <code>undefined</code> instead.</p>
+              <p>Accepts the same options as <code>toNull()</code>.</p>
+              <pre><code>const result = tb.transform(tb.pipe(tb.string(), tb.toUndefined()), "");
+// result: undefined</code></pre>
+            </div>
+
+            <div class="mb-4">
+              <h5>toDefault(defaultValue)</h5>
+              <p>Replaces null values with a specified default value.</p>
+              <pre><code>const result = tb.transform(
+  tb.pipe(tb.string(), tb.toNull(), tb.toDefault("N/A")), 
+  ""
+);
+// result: "N/A"</code></pre>
+            </div>
+          </div>
+
+          <div class="example-box">
+            <h4>Combined Normalization Actions Example</h4>
+            <p>This example demonstrates how to combine normalization actions with other transformations to create a robust data processor:</p>
+            <pre><code>import * as tb from 'transformbot';
+
+// Create a reusable transformation for a form field
+const phoneNumberFormatter = tb.pipe(
+  tb.string(),                   // Ensure we're working with a string
+  tb.trim(),                     // Remove surrounding whitespace
+  tb.toDigits(),                 // Keep only digits
+  tb.toNull(),                   // Convert empty strings to null
+  tb.toDefault("Not provided")   // Replace null with a default message
+);
+
+// Example usage with different inputs
+const values = [
+  " (123) 456-7890 ",  // Normal phone number with formatting
+  "",                   // Empty string
+  null                  // Null value
+];
+
+const results = values.map(value => tb.transform(phoneNumberFormatter, value));
+// Results: ["1234567890", "Not provided", "Not provided"]</code></pre>
+          </div>
+        </section>
+
+        <section id="custom-actions" class="section-group">
+          <h3>Custom Actions</h3>
+          <p>Create your own transformation functions for specialized use cases.</p>
+
+          <div class="mb-5">
+            <h4>custom(transformFn)</h4>
+            <p>
+              The <code>custom()</code> function allows you to create your own transformation logic by providing a function
+              that takes an input value and returns a transformed output value. This is useful for specialized transformations
+              that aren't covered by the built-in actions.
+            </p>
+            <p>You can use the <code>custom()</code> function with any type of input and output.</p>
+
+            <pre><code>import * as tb from 'transformbot';
+
+// Simple custom transformation for a string
+const result1 = tb.transform(
+  tb.pipe(
+    tb.string(),
+    tb.custom(value => value.split('').reverse().join(''))
+  ),
+  "hello"
+);
+// result1: "olleh" (reversed string)
+
+// Custom transformation for a number
+const result2 = tb.transform(
+  tb.pipe(
+    tb.number(),
+    tb.custom(value => value * value)
+  ),
+  5
+);
+// result2: 25 (squared value)
+
+// Custom transformation that changes the type
+const result3 = tb.transform(
+  tb.pipe(
+    tb.number(),
+    tb.custom(value => ({ value, squared: value * value }))
+  ),
+  5
+);
+// result3: { value: 5, squared: 25 } (object with original and squared values)</code></pre>
+          </div>
+
+          <div class="example-box">
+            <h4>Complex Custom Action Example</h4>
+            <p>This example demonstrates how to create and use a more complex custom transformation function:</p>
+            <pre><code>import * as tb from 'transformbot';
+
+// Create a custom formatter for credit card numbers
+const formatCreditCard = tb.custom(value => {
+  if (value === null || value === undefined) {
+    return null;
+  }
+
+  // First ensure we're working with a string
+  let cardStr = String(value);
+
+  // Remove all non-digit characters
+  cardStr = cardStr.replace(/\D/g, '');
+
+  // Check if it's a valid length for a credit card
+  if (cardStr.length < 13 || cardStr.length > 19) {
+    return null; // Invalid length
+  }
+
+  // Format with spaces every 4 digits
+  const formatted = cardStr.match(/.{1,4}/g)?.join(' ');
+
+  // Mask all but the last 4 digits
+  const lastFourDigits = cardStr.slice(-4);
+  const maskedPart = cardStr.slice(0, -4).replace(/./g, '*');
+  const maskedNumber = maskedPart.match(/.{1,4}/g)?.join(' ') + ' ' + lastFourDigits;
+
+  return {
+    raw: cardStr,
+    formatted: formatted,
+    masked: maskedNumber
+  };
+});
+
+// Use the custom formatter in a transformation pipeline
+const creditCardProcessor = tb.pipe(
+  tb.string(),
+  tb.trim(),
+  formatCreditCard,
+  tb.toNull()
+);
+
+// Example usage
+const cardInput = "4111-1111-1111-1111";
+const processedCard = tb.transform(creditCardProcessor, cardInput);
+// Result: {
+//   raw: "4111111111111111",
+//   formatted: "4111 1111 1111 1111",
+//   masked: "**** **** **** 1111"
+// }</code></pre>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p>© 2025 TransformBot | Created by Matej Szendi</p>
+      <p>License: <a href="https://opensource.org/licenses/MIT" class="text-white">MIT</a> | <a href="https://github.com/MatyCZ/transformbot" class="text-white" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Highlight active link in sidebar based on scroll position
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.sidebar .nav-link');
+
+      window.addEventListener('scroll', function() {
+        let current = '';
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          if (window.pageYOffset >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

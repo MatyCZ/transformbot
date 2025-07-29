@@ -12,7 +12,8 @@ export function string(): StringConversion {
       typeof input === "function" ||
       typeof input === "object" ||
       typeof input === "symbol" ||
-      Array.isArray(input)
+      Array.isArray(input) ||
+      Number.isNaN(input)
     ) {
       return null;
     }
