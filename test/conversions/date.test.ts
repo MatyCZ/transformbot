@@ -33,7 +33,7 @@ describe("Date conversions from Date", () => {
   it("should convert Date to Date", () => {
     const date = new Date();
 
-    expect(convert(date)).toBe(date);
+    expect(convert(date)).toStrictEqual(date);
   });
 });
 
@@ -272,56 +272,56 @@ describe("Date conversions from string", () => {
     expect(convert("yes")).toBeNull();
   });
 
-  it("should convert string `18.09.2020` to Date `2020-09-18T00:00:00.000Z`", () => {
-    expect(convert("18.09.2020")).toStrictEqual(
-      new Date("2020-09-18T00:00:00.000Z"),
+  it("should convert string `18.09.2020` to Date `2020-09-17T22:00:00.000Z`", () => {
+    expect(date("DD.MM.YYYY")("18.09.2020")).toStrictEqual(
+      new Date("2020-09-17T22:00:00.000Z"),
     );
   });
 
   it("should convert string `18.09.2020 18:19` to Date `2020-09-18T16:19:00.000Z`", () => {
-    expect(convert("18.09.2020 18:19")).toStrictEqual(
+    expect(date("DD.MM.YYYY HH:mm")("18.09.2020 18:19")).toStrictEqual(
       new Date("2020-09-18T16:19:00.000Z"),
     );
   });
 
   it("should convert string `1.9.2020 3:4:5` to Date `2020-09-01T01:04:05.000Z`", () => {
-    expect(convert("1.9.2020 3:4:5")).toStrictEqual(
+    expect(date("D.M.YYYY H:m:s")("1.9.2020 3:4:5")).toStrictEqual(
       new Date("2020-09-01T01:04:05.000Z"),
     );
   });
 
   it("should convert string `18.09.2020 01:09:05` to Date `2020-09-17T23:09:05.000Z`", () => {
-    expect(convert("18.09.2020 01:09:05")).toStrictEqual(
+    expect(date("D.M.YYYY H:m:s")("18.09.2020 01:09:05")).toStrictEqual(
       new Date("2020-09-17T23:09:05.000Z"),
     );
   });
 
-  it("should convert string `07/29/2025` to Date `2025-07-29T00:00:00.000Z`", () => {
-    expect(convert("07/29/2025")).toStrictEqual(
-      new Date("2025-07-29T00:00:00.000Z"),
+  it("should convert string `07/29/2025` to Date `2025-07-28T22:00:00.000Z`", () => {
+    expect(date("M/D/YYYY")("07/29/2025")).toStrictEqual(
+      new Date("2025-07-28T22:00:00.000Z"),
     );
   });
 
   it("should convert string `07/29/2025 13:57` to Date `2025-07-29T11:57:00.000Z`", () => {
-    expect(convert("07/29/2025 13:57")).toStrictEqual(
+    expect(date("M/D/YYYY HH:mm")("07/29/2025 13:57")).toStrictEqual(
       new Date("2025-07-29T11:57:00.000Z"),
     );
   });
 
   it("should convert string `07/29/2025 02:01:09` to Date `2025-07-29T00:01:09.000Z`", () => {
-    expect(convert("07/29/2025 02:01:09")).toStrictEqual(
+    expect(date("M/D/YYYY HH:mm:ss")("07/29/2025 02:01:09")).toStrictEqual(
       new Date("2025-07-29T00:01:09.000Z"),
     );
   });
 
   it("should convert string `07/29/2025 2:1` to Date `2025-07-29T00:01:00.000Z`", () => {
-    expect(convert("07/29/2025 2:1")).toStrictEqual(
+    expect(date("M/D/YYYY H:m")("07/29/2025 2:1")).toStrictEqual(
       new Date("2025-07-29T00:01:00.000Z"),
     );
   });
 
   it("should convert string `07/29/2025 2:1:9` to Date `2025-07-29T00:01:09.000Z`", () => {
-    expect(convert("07/29/2025 2:1:9")).toStrictEqual(
+    expect(date("M/D/YYYY H:m:s")("07/29/2025 2:1:9")).toStrictEqual(
       new Date("2025-07-29T00:01:09.000Z"),
     );
   });
@@ -374,15 +374,21 @@ describe("Date conversions from string", () => {
     );
   });
 
+  it("should convert string `2018-04-13T19:18:17+02:00` to Date `2018-04-13T17:18:17.000Z`", () => {
+    expect(convert("2018-04-13T19:18:17+02:00")).toStrictEqual(
+      new Date("2018-04-13T17:18:17.000Z"),
+    );
+  });
+
   it("should convert string `2018-04-13 19:18:17.040+02:00` to Date `2018-04-13T17:18:17.040Z`", () => {
     expect(convert("2018-04-13 19:18:17.040+02:00")).toStrictEqual(
       new Date("2018-04-13T17:18:17.040Z"),
     );
   });
 
-  it("should convert string `18. 9. 2020` to Date `2020-09-18T00:00:00.000Z`", () => {
-    expect(convert("18. 9. 2020")).toStrictEqual(
-      new Date("2020-09-18T00:00:00.000Z"),
+  it("should convert string `18. 9. 2020` to Date `2020-09-17T22:00:00.000Z`", () => {
+    expect(date("D. M. YYYY")("18. 9. 2020")).toStrictEqual(
+      new Date("2020-09-17T22:00:00.000Z"),
     );
   });
 });
