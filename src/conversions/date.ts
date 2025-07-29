@@ -1,4 +1,4 @@
-import {Conversion} from "../types.ts";
+import { Conversion } from "../types.ts";
 
 export type DateConversion = Conversion<unknown, Date | null>;
 
