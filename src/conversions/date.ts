@@ -2,29 +2,37 @@ import { Conversion } from "../types.ts";
 
 export type DateConversion = Conversion<unknown, Date | null>;
 
+export type DatePattern =
+  | "MM/dd/yyyy"
+  | "dd-MM-yyyy"
+  | "dd.MM.yyyy"
+  | "dd/MM/yyyy"
+  | "yyyy-MM-dd"
+  | "yyyy/MM/dd";
+
 export function formatDateToISO(input: string): string | null {
   if (!input) {
     return null;
   }
 
-  // ISO formát: 1990-05-01
+  // ISO format: 1990-05-01
   const isoPattern = /^(\d{4})-(\d{2})-(\d{2})$/;
 
-  // ISO formát s časem: 1990-05-01T14:30:45 nebo 1990-05-01T14:30
+  // ISO format with time: 1990-05-01T14:30:45 or 1990-05-01T14:30
   const isoTimePattern =
     /^(\d{4})-(\d{2})-(\d{2})T(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?$/;
 
-  // EU formát: 18.09.2020 nebo 18. 9. 2020
+  // EU format: 18.09.2020 or 18. 9. 2020
   const euPattern = /^(\d{1,2})\.( )?(\d{1,2})\.( )?(\d{4})$/;
 
-  // EU formát s časem: 18.09.2020 14:30:45 nebo 18. 9. 2020 14:30:45 nebo 18.09.2020 14:30
+  // EU format with time: 18.09.2020 14:30:45 or 18. 9. 2020 14:30:45 or 18.09.2020 14:30
   const euTimePattern =
     /^(\d{1,2})\.( )?(\d{1,2})\.( )?(\d{4})( )(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?$/;
 
-  // USA formát: 07/29/2025
+  // USA format: 07/29/2025
   const usaPattern = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
 
-  // USA formát s časem: 07/29/2025 14:30:45 nebo 07/29/2025 14:30
+  // USA format with time: 07/29/2025 14:30:45 or 07/29/2025 14:30
   const usaTimePattern =
     /^(\d{1,2})\/(\d{1,2})\/(\d{4})( )(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?$/;
 
@@ -112,12 +120,12 @@ export function formatDateToISO(input: string): string | null {
     return null;
   }
 
-  // Kontrola platnosti data
+  // Date validation
   if (month < 1 || month > 12 || day < 1 || day > 31) {
     return null;
   }
 
-  // Kontrola platnosti času
+  // Time validation
   if (
     hasTime &&
     (hours < 0 ||
@@ -130,7 +138,7 @@ export function formatDateToISO(input: string): string | null {
     return null;
   }
 
-  // Formátování data do ISO formátu
+  // Format date to ISO format
   const dateString = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
 
   if (hasTime) {
@@ -168,12 +176,12 @@ export function date(): DateConversion {
     if (typeof input === "string") {
       const trimmed = input.trim();
 
-      // Pokud je řetězec prázdný, vrátíme null
+      // If a string is empty, return null
       if (trimmed === "") {
         return null;
       }
 
-      // Kontrola, zda řetězec obsahuje pouze číslice (číslo jako řetězec)
+      // Check if a string contains only digits (number as string)
       if (/^-?\d+$/.test(trimmed)) {
         const num = Number(trimmed);
         const numStrLength = Math.abs(num).toString().length;
@@ -189,20 +197,19 @@ export function date(): DateConversion {
         return null;
       }
 
-      // Nyní zkontrolujeme, zda řetězec obsahuje pouze číslice (možná s čárkou nebo tečkou)
-      // Pokud ano, vrátíme null
+      // Check if a string contains only digits (possibly with comma or dot)
       if (/^-?\d+([.,]\d+)?$/.test(trimmed)) {
         return null;
       }
 
-      // Převod stringu na Date objekt podle různých formátů
+      // Convert string to a Date object according to various formats
       const isoString = formatDateToISO(trimmed);
 
       if (isoString) {
         return new Date(isoString);
       }
 
-      // Pokud se nepodařilo převést string pomocí našich vzorů, zkusíme nativní převod
+      // If string conversion using our patterns failed, try native conversion
       const dateObj = new Date(trimmed);
 
       if (!isNaN(dateObj.getTime())) {
